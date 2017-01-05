@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.fxmisc.richtext.CodeArea?>
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            minWidth="1000" minHeight="800">
+    <center>
+        <AnchorPane>
+            <VBox
+                    AnchorPane.topAnchor="0"
+                    AnchorPane.bottomAnchor="0"
+                    AnchorPane.leftAnchor="0"
+                    AnchorPane.rightAnchor="0">
+                <TitledPane text="Theory" VBox.vgrow="ALWAYS" prefHeight="600">
+                    <VBox>
+                        <CodeArea fx:id="theoryCode" VBox.vgrow="ALWAYS" />
+                        <TableView fx:id="theoryErrors"></TableView>
+                    </VBox>
+                </TitledPane>
+                <TitledPane text="Query" VBox.vgrow="ALWAYS">
+                    <VBox>
+                        <HBox>
+                            <CodeArea fx:id="queryCode" HBox.hgrow="ALWAYS"
+                                      maxHeight="25" prefHeight="25" minHeight="25" />
+                            <Button fx:id="querySubmit" text="Evaluate" />
+                        </HBox>
+                        <TableView fx:id="queryErrors"></TableView>
+                    </VBox>
+                </TitledPane>
+            </VBox>
+        </AnchorPane>
+    </center>
+    <right>
+        <AnchorPane>
+            <TitledPane text="Log"
+                        AnchorPane.topAnchor="0"
+                        AnchorPane.bottomAnchor="0"
+                        AnchorPane.leftAnchor="0"
+                        AnchorPane.rightAnchor="0">
+                <VBox>
+                    <TextArea fx:id="log" VBox.vgrow="ALWAYS"/>
+                </VBox>
+            </TitledPane>
+        </AnchorPane>
+    </right>
+</BorderPane>

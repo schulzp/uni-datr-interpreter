@@ -1,0 +1,58 @@
+.node {
+    -fx-fill: darkgreen;
+    -fx-font-weight: bold;
+}
+
+.path {
+    -fx-fill: green;
+    -fx-font-weight: bold;
+}
+
+.path.atom {
+    -fx-fill: olivedrab;
+}
+
+.atom {
+    -fx-fill: blue;
+}
+
+.literal.atom {
+    -fx-fill: royalblue;
+}
+
+.comment {
+	-fx-fill: lightslategray;
+}
+
+.quote {
+    -fx-fill: firebrick;
+    -rtfx-background-color: navajowhite;
+}
+
+.quote,
+.quote.node,
+.quote.path,
+.quote.path.atom {
+    -fx-font-style: italic;
+}
+
+.quote.node {
+    -fx-fill: darkred;
+}
+
+.quote.path {
+    -fx-fill: brown;
+}
+
+.quote.path.atom {
+    -fx-fill: crimson;
+}
+
+.paragraph-box:has-caret {
+    -fx-background-color: lightgoldenrodyellow;
+}
+
+.styled-text-area {
+    -fx-highlight-fill: orange;
+    -fx-highlight-text-fill: white;
+}

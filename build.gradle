@@ -1,0 +1,64 @@
+buildscript {
+    dependencies {
+        classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.7.0'
+    }
+    repositories {
+        mavenLocal()
+        mavenCentral()
+
+    }
+}
+
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://dl.bintray.com/schulzp/maven/'
+    }
+    maven {
+        url 'https://dl.bintray.com/jerady/maven'
+    }
+}
+
+apply plugin: 'javafx-gradle-plugin'
+
+group 'lang.edu'
+version '1.0-SNAPSHOT'
+
+jfx {
+    appName 'DATR Interpreter'
+    mainClass 'datr.edu.ui.DatrInterpreterApplication'
+    vendor 'Universität Bremen'
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-javafx:0.5.7'
+    compile group: 'org.parboiled', name: 'parboiled-java', version: '1.1.7'
+    compile group: 'org.antlr', name: 'antlr4-runtime', version: '4.5.3'
+    compile group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.7-M2'
+
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.7'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.7'
+
+    compile 'de.jensd:fontawesomefx-fontawesome:4.7.0'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.2.21'
+    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.6.1'
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}

@@ -1,0 +1,15 @@
+VERB:
+        <dritte sing> == ( "<stem>" t)
+        <dritte sing prät> == ("<stem>" te)
+        <erste sing> == ("<stem>" e).
+GEHEN:
+        <> == VERB
+        <dritte sing prät> == ging
+        <stem> == geh.
+SAGEN:
+        <> == VERB
+        <stem> == sag.
+SINGEN:
+        <> == VERB
+        <stem> == sing
+        <dritte sing prät> == sang.
