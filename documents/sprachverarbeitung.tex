@@ -1,0 +1,426 @@
+\documentclass[a4paper]{sprach}
+
+\usepackage{fontspec}% Schriftumschaltung mit den nativen XeTeX-Anweisungen
+                     % vornehmen. Voreinstellung: Latin Modern
+
+% Hurenkinder und Schusterjungen verhindern
+\clubpenalty10000
+\widowpenalty10000
+\displaywidowpenalty=10000
+
+\usepackage{fontspec,xltxtra,xunicode,xspace,microtype,csquotes}
+\defaultfontfeatures{Ligatures=TeX}
+
+\setromanfont[Ligatures={Common,TeX}]{Minion Pro}
+\setsansfont[Scale=MatchLowercase]{Myriad Pro}
+\usepackage{polyglossia}% Sprachumschaltung
+
+\usepackage{pdflscape}
+
+\usepackage{caption,subcaption}
+
+\usepackage{verbatim}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{unicode-math}
+\setmathfont{XITS Math}
+
+\usepackage{avm}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+
+\usepackage{footnote}
+\makesavenoteenv{tabular}
+\makesavenoteenv{table}
+
+\DeclarePairedDelimiterX\typeinstance[1]{⟪}{⟫}{#1}
+\newcommand{\lmd}[1]{\lambda #1}
+\newcommand{\type}[1]{\langle #1 \rangle}
+\newcommand{\cat}[1]{\text{#1}}
+\newcommand{\func}[2]{\text{#1}(#2)}
+\newcommand{\kgr}[1]{\langle #1 \rangle}
+
+\setdefaultlanguage{german}% Voreingestellte Dokumentsprache: Deutsch
+
+\begin{document}
+
+\Abgabeblatt{2}{10. Januar 2017}{Hagen Langer}{Lea Jakubigk}{Peter Schulz}{}
+
+\tableofcontents
+
+\section*{Aufgabe 1}
+
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{llllll}
+    \hline
+     ID & folgt aus (ID) & von i & bis j & links & $\rightarrow$ rechts     \\ \hline
+    1   & 0              & 0     & 0     & S     & * S KONJ S \\
+    2   & 0|1            & 0     & 0     & S     & * NP VP    \\
+    3   & 2              & 0     & 0     & NP    & * NP PP    \\
+    4   & 2|3            & 0     & 0     & NP    & * DET N    \\
+    4   & 2|3            & 0     & 1     & NP    & DET * N    \\
+    4   & 2|3            & 0     & 2     & NP    & DET N *    \\
+    2   & 0              & 0     & 2     & S     & NP * VP    \\
+    3   & 2              & 0     & 2     & NP    & NP * PP    \\
+    5   & 3              & 2     & 2     & PP    & * P NP \textsuperscript{(1)}\\
+    6   & 2              & 2     & 2     & VP    & * V NP PP  \\
+    7   & 2              & 2     & 2     & VP    & * V NP     \\
+    6   & 2              & 2     & 3     & VP    & V * NP PP  \\
+    7   & 2              & 2     & 3     & VP    & V * NP     \\
+    8   & 6|7            & 3     & 3     & NP    & * NP PP    \\
+    9   & 6|7|8          & 3     & 3     & NP    & * DET N    \\
+    9   & 6|7|8          & 3     & 4     & NP    & DET * N    \\
+    9   & 6|7|8          & 3     & 5     & NP    & DET N *    \\
+    8   & 6|7            & 3     & 5     & NP    & NP * PP    \\
+    6   & 2              & 2     & 5     & VP    & V NP * PP  \\
+    7   & 2              & 2     & 5     & VP    & V NP *     \\
+    10  & 6|8            & 5     & 5     & PP    & * P NP     \\
+    10  & 6|8            & 5     & 6     & PP    & P * NP     \\
+    11  & 10             & 6     & 6     & NP    & * NP PP    \\
+    12  & 10|11          & 6     & 6     & NP    & * DET N    \\
+    12  & 10|11          & 6     & 7     & NP    & DET * N    \\
+    12  & 10|11          & 6     & 8     & NP    & DET N *    \\
+    11  & 10             & 6     & 8     & NP    & NP * PP \textsuperscript{(2)}\\
+    10  & 6              & 5     & 8     & PP    & P NP *     \\
+    6   & 2              & 2     & 8     & VP    & V NP PP *  \\
+    2   & 0|1            & 0     & 8     & S     & NP VP *    \\
+    1   & 0              & 0     & 8     & S     & S * KONJ S \textsuperscript{(2)}\\
+    \end{tabular}
+    \caption{Earley-Parser-Zustände für die Eingabe:
+\textit{\textsubscript{0} 
+der \textsubscript{1}
+Hund \textsubscript{2}
+sieht \textsubscript{3}
+die \textsubscript{4}
+Katze \textsubscript{5}
+mit \textsubscript{6}
+dem \textsubscript{7}
+Fernrohr\textsubscript{8}}.
+      \textsuperscript{(1)}Kein P an (2,2)$\rightarrow$ Nicht weiter verfolgen,
+      \textsuperscript{(2)}Ende erreicht $\rightarrow$ Nicht weiter verfolgen
+    }
+\end{table}
+
+
+\section*{Aufgabe 2}
+\subsection*{Lexikoneinträge}
+\subsubsection*{Nomen}
+
+\begin{avm}
+    Hund \[
+    CAT & N\\
+    AGR & \[
+     		KASUS & nom $\vee$ akk $\vee$  dat  \\
+    		NUM & sg \\
+    		PER & 3 \\
+    		GEN & mask   		
+    	\]
+    \]
+\end{avm},
+
+\begin{avm}
+    Katze \[
+    CAT & N\\
+    AGR & \[
+   			KASUS & nom $\vee$ akk $\vee$  dat  \\
+    		NUM & sg \\
+    		PER & 3 \\
+    		GEN & fem 
+    	\]
+    \]
+\end{avm}
+
+\subsubsection*{Determinierer}
+
+\begin{avm}
+der \[
+CAT & DET\\
+AGR & \[
+		KASUS & nom \\
+    	NUM & sg \\
+    	GEN & mask 	
+	\] $\vee$ \[
+		KASUS & dat \\
+    	NUM & sg \\
+    	GEN & fem 
+    \]
+\]
+\end{avm},
+
+\begin{avm}
+die \[
+CAT & DET\\
+AGR & \[
+		KASUS & nom $\vee$ akk \\
+    	NUM & sg \\
+    	GEN & fem 
+	\]
+\]
+\end{avm},
+
+\begin{avm}
+dem \[
+CAT & DET\\
+AGR & \[
+    	KASUS &  dat  \\
+    	NUM & sg \\
+    	GEN & mask 
+	\]
+\]
+\end{avm},
+
+\begin{avm}
+den \[
+CAT & DET\\
+AGR & \[
+	    KASUS & akk  \\
+    	NUM & sg \\
+    	GEN & mask 
+	\]
+\]
+\end{avm}
+
+\subsubsection*{Verben}
+
+\begin{avm}
+sieht \[
+CAT & V\\
+AGR & \[
+    	NUM & sg \\
+    	PER & 3 
+	\]\\
+SUBCAT & \[
+		ARG$_{\text{NP}_\text{Subj}}$ & \[
+        	CAT & NP\\
+            AGR & \[
+            	KASUS & nom
+            \]
+        \]\\
+        ARG$_{\text{NP}_\text{Obj}}$ & \[
+         	CAT & NP\\
+            AGR & \[
+            	KASUS & akk
+            \]       
+        \]
+	\]
+\]
+\end{avm},
+
+\begin{avm}
+schläft \[
+CAT & V\\
+AGR & \[
+    	NUM & sg \\
+    	PER & 3 
+	\]\\
+SUBCAT & none
+\]
+\end{avm}
+
+\subsubsection*{Präposition}
+
+\begin{avm}
+mit \[
+CAT & P\\
+SUBCAT & \[
+		ARG$_\text{NP}$ & \[
+        	CAT & NP\\
+            AGR & \[
+            	KASUS & dat
+            \]
+        \]
+	\]
+\]
+\end{avm}
+
+\subsection*{Definierte Kategorien}
+
+\begin{avm}
+S \[
+CAT & S\\
+SUBCAT & \[
+		ARG$_\text{NP}$ & \[
+        	CAT & NP
+        \]\\
+        ARG$_\text{VP}$ & \[
+        	CAT & VP
+        \]
+	\]
+\]
+\end{avm}
+
+
+\begin{avm}
+NP \[
+CAT & NP\\
+SUBCAT & \[
+		ARG$_\text{DET}$ & \[
+        	CAT & DET
+        \]\\
+        ARG$_\text{N}$ & \[
+        	CAT & N
+        \]
+	\] $\vee$ \[
+    	ARG$_\text{NP}$ & \[
+        	CAT & NP
+        \]\\
+        ARG$_\text{PP}$ & \[
+        	CAT & PP
+        \]
+    \]
+\]
+\end{avm}
+
+\begin{avm}
+VP \[
+CAT & VP\\
+SUBCAT & \[
+		ARG$_\text{V}$ & \[
+        	CAT & V
+        \]\\
+        ARG$_\text{NP}$ & \[
+        	CAT & NP
+        \]
+	\]
+\]
+\end{avm}
+
+\begin{avm}
+PP \[
+CAT & PP\\
+SUBCAT & \[
+		ARG$_\text{P}$ & \[
+        	CAT & P
+        \]\\
+        ARG$_\text{NP}$ & \[
+        	CAT & NP
+        \]
+	\]
+\]
+\end{avm}
+
+\subsubsection*{Ergänzende Regeln}
+
+Die folgenden Regeln ergänzen die zuvor aufgelisteten Einträge. Es wird eine vereinfachte/verkürzte Notation
+verwendet: Im Kontext von $\cat{S} \rightarrow \cat{NP}\;\cat{VP}$ steht
+$\kgr{\text{VP|\dots}}$ (Gleichung \ref{eq:akk}) wobei VP $\equiv$ S|SUBCAT|ARG$_\text{VP}$.
+
+\begin{alignat}{2}
+\cat{S} &\rightarrow \cat{NP}\;\cat{VP}\\ 
+  &\; \kgr{\text{NP|SUBCAT|ARG}_\text{N}\text{|KASUS}} = nom\label{eq:nom}\\
+  &\; \kgr{\text{VP|SUBCAT|ARG}_{\text{NP}_\text{Obj}}\text{|SUBCAT|ARG}_\text{N}|\text{KASUS}} = akk\label{eq:akk}\\
+\cat{NP} &\rightarrow \cat{DET}\;\cat{N}\\
+  &\; \kgr{\text{DET|AGR}} = \kgr{\text{N|AGR}}\label{eq:genus}
+%\cat{NP} &\rightarrow \cat{NP}\;\cat{PP}\\
+%\cat{VP} &\rightarrow \cat{V}\;\cat{NP}\\
+%\cat{PP} &\rightarrow \cat{P}\;\cat{NP}\\
+%  &\;\kgr{\text{P|SUBCAT|ARG}_\text{P}|\text{AGR|KASUS}} = \kgr{\text{NP|SUBCAT|ARG}_\text{NP}\text{|SUBCAT|ARG}_\text{N}|\text{KASUS}}
+\end{alignat}
+
+Dadurch werden folgende ungrammatikalischen Ketten als solche erkannt:
+
+\begin{description}
+  \item [\textit{das Hund} sieht die Katze] wird durch \ref{eq:genus} ausgeschlossen.
+  \item [\textit{den Hund} sieht den Hund] wird durch \ref{eq:nom} ausgeschlossen.
+  \item [die Katze \textit{schläft} den Hund] wird durch \ref{eq:akk} ausgeschlossen.
+\end{description}
+
+
+\section*{Aufgabe 3}
+
+\begin{figure}[ht]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \begin{tikzpicture}
+      \tikzset{every tree node/.style={align=center,anchor=north}}
+      \tikzset{level distance=30pt}
+      \Tree [.S 
+        [.NP [.DET der ] [.N Hund ] ]
+        [.VP [.V sieht ] [.NP [.DET die ] [.NP [.ADJ braune ] [.N Katze ] ] ] ] ]
+    \end{tikzpicture}
+    \caption{Syntaxbaum}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \begin{align*}
+      \cat{S} &\rightarrow \cat{NP}\;\cat{VP}\\
+      \cat{NP} &\rightarrow \cat{DET}\;\cat{N}\\
+      \cat{NP} &\rightarrow \cat{ADJ}\;\cat{N}\\
+      \cat{VP} &\rightarrow \cat{V}\;\cat{NP}\\\cline{1-2}
+      \cat{V} &\rightarrow \text{sieht}\\
+      \cat{N} &\rightarrow \text{Hund}\;|\;\text{Katze}\\
+      \cat{ADJ} &\rightarrow \text{braune}\\
+      \cat{DET} &\rightarrow \text{der}\;|\;\text{die}
+    \end{align*}
+    \caption{Kategorialgrammatik}
+  \end{subfigure}
+  \caption{Zerlegung}
+\end{figure}
+
+\begin{landscape}
+  \begin{figure}[p]
+\begin{tikzpicture}
+\tikzset{every tree node/.style={align=center,anchor=north}}
+\Tree [.\node (n:satz) {$t$};
+  [.{$\func{sehen}{\text{dbk}}(\text{dh})$}
+    [.\node (n:der_hund) {$e$}; 
+      [.{$\exists x\Big(\func{h}{x}\wedge \forall y\big(\func{h}{y} \rightarrow x = y\big)\Big) := \text{dh}$}
+        [.\node (n:der) {$\type{\type{e,t},e}$}; 
+          [.{$\lmd{P}.\exists x\big(P(x)\wedge \forall y\big(P(y) \rightarrow x = y\big)\big)$} {der} ]
+        ]
+        [.\node (n:hund) {$\type{e,t}$}; 
+          [.{$\lmd{x}.\func{h}{x}$} {Hund} ]
+        ] 
+      ]
+    ]
+    [.\node (n:x_sieht_die_braune_katze) {$\type{e,t}$};
+      [.{$\lmd{x}.\func{sehen}{\text{dbk}}(x)$} 
+        [.\node (n:sieht) {$\type{e,\type{e,t}}$}; 
+          [.{$\lmd{y}\lmd{x}.\func{sehen}{y}(x)$} {sieht} ] 
+        ]
+        [.\node (n:die_braune_katze) {$e$};
+          [.{$\exists x\Big(\func{bk}{x}\wedge \forall y\big(\func{bk}{y} \rightarrow x = y\big)\Big) := \text{dbk}$} 
+            [.\node (n:die) {$\type{\type{e,t},e}$}; 
+              [.{$\lmd{P}.\exists x\big(P(x)\wedge \forall y\big(P(y) \rightarrow x = y\big)\big)$} {die} ]
+            ]
+            [.\node (n:braune_katze) {$\type{e,t}$};
+              [.{$\lmd{x}.\big(\func{b}{x} \wedge \func{k}{x}\big) := \lmd{x}.\func{bk}{x}$} 
+                [.\node (n:braune) {$\type{e,t}$}; [.{$\lmd{x}.\func{b}{x}$} {braune} ] ]
+                [.\node (n:katze) {$\type{e,t}$}; [.{$\lmd{x}.\func{k}{x}$} {Katze} ] ] 
+              ]  
+            ]
+          ]
+        ]
+      ]
+    ] 
+  ]
+]
+\end{tikzpicture}
+\begin{equation*}
+  \typeinstance{\text{der Hund sieht die braune Katze}} = \exists x\exists y
+  \Big[
+    \Big(
+      \func{h}{x}
+      \wedge
+      \forall z \big( \func{h}{z} \rightarrow x = z \big)
+    \Big)
+    \wedge
+    \Big(
+      \big( \func{b}{y} \wedge \func{k}{y} \big)
+      \wedge
+      \forall z \big( \func{b}{z} \wedge \func{k}{z} \rightarrow y = z \big)
+    \Big)
+    \wedge
+    \text{sehen}(y)(x)
+  \Big]
+\end{equation*}
+
+\caption{Typen und logische Entsprechung}
+\end{figure}
+
+
+\end{landscape}
+
+
+\end{document}
