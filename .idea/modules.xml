@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/datr-interpreter.iml" filepath="$PROJECT_DIR$/datr-interpreter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/datr-interpreter.iml" filepath="$PROJECT_DIR$/.idea/modules/datr-interpreter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/datr-interpreter_main.iml" filepath="$PROJECT_DIR$/.idea/modules/datr-interpreter_main.iml" group="datr-interpreter" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/datr-interpreter_test.iml" filepath="$PROJECT_DIR$/.idea/modules/datr-interpreter_test.iml" group="datr-interpreter" />
     </modules>
   </component>
 </project>

@@ -36,7 +36,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-javafx:0.5.7'
     compile group: 'org.parboiled', name: 'parboiled-java', version: '1.1.7'
     compile group: 'org.antlr', name: 'antlr4-runtime', version: '4.5.3'
-    compile group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.7-M2'
+    compile group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.9.1'
 
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.7'
     compile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.7'

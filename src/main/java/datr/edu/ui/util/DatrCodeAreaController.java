@@ -9,12 +9,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-import javafx.geometry.Point2D;
 import javafx.scene.control.Label;
 import javafx.stage.Popup;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
-import org.fxmisc.richtext.PopupAlignment;
 import org.fxmisc.richtext.model.StyleSpans;
 import org.fxmisc.richtext.model.StyleSpansBuilder;
 import org.slf4j.Logger;
@@ -63,8 +61,7 @@ public class DatrCodeAreaController<T> {
                 .successionEnds(Duration.ofMillis(500))
                 .supplyTask(this::computeHighlightingAsync)
                 .awaitLatest(codeArea.richChanges())
-                .filterMap(t -> {
-                    if(t.isSuccess()) {
+                .filterMap(t -> { if(t.isSuccess()) {
                         return Optional.of(t.get());
                     } else {
                         LOGGER.error("Failed to update highlighting", t.getFailure());
@@ -136,8 +133,6 @@ public class DatrCodeAreaController<T> {
     }
 
     private Task<StyleSpans<Collection<String>>> computeHighlightingAsync() {
-        codeArea.setPopupWindow(null);
-
         String text = codeArea.getText();
         Task<StyleSpans<Collection<String>>> task = new Task<StyleSpans<Collection<String>>>() {
             @Override
@@ -156,9 +151,9 @@ public class DatrCodeAreaController<T> {
         popupMessage.setText(error.msg);
 
         codeArea.position(error.row, error.col);
-        codeArea.setPopupAlignment(PopupAlignment.SELECTION_BOTTOM_CENTER);
-        codeArea.setPopupAnchorOffset(new Point2D(4, 4));
-        codeArea.setPopupWindow(popup);
+
+        // Simply log them, since popup support has been removed from RichTextFX
+        LOGGER.debug("Error: " + error.msg + " at " + error.row + "," + error.col);
 
         popupMessage.setVisible(true);
     }
